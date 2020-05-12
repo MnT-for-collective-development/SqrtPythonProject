@@ -42,11 +42,15 @@ def SqrtWrk(number, condition, rounder): #тут работаем с самим 
         temp += str(round(pow(int(number), 0.5), rounder)) #возводим в степень 0.5, округляем до указанного числа после точки
         #также работает и с длинной арифметикой
         
-    elif (condition == 1): 
+    elif (condition == 3): 
         #пришел float в виде (1.2; 1.2E+11), длинный float, float-ноль
         temp += str(round(pow(locale.atof(number), 0.5), rounder))
         
-    else 
+    elif (condition == 1):
+        #пришло комплексное число в виде 45+3i или 45+3j
+        number = number.replace('i', 'j') #приводим к перевариваемому питоном виду
+        compTemp = pow(complex(number), 0.5) #находим корень
+        temp += str(round(compTemp.real, rounder) + round(compTemp.imag, rounder)*1j)
         
     # if (condition == 3):
         
