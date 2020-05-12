@@ -22,7 +22,7 @@ class ExampleApp(QtWidgets.QMainWindow, formBase.Ui_MainWindow):
         
     def SqrtOp(self):
         temp = self.askTextBrowser.toPlainText() #забираем строку из первого текстБокса
-        self.answerTextBrowser.setText(SqrtWrk(isMatch(temp), int(self.roundSpinBox.cleanText()))) #отправляем во второй текстовый обработанную строку 
+        self.answerTextBrowser.setText(SqrtWrk(isMatch(temp), int(self.roundSpinBox_2.cleanText()))) #отправляем во второй текстовый обработанную строку 
                                             #из формы тащится значение спинбокса с кол-вом знаков после точки
 
 def isMatch(string): #тут надо проверять соответствие и возвращать какие-то индексы
