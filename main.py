@@ -22,18 +22,21 @@ class ExampleApp(QtWidgets.QMainWindow, formBaseUi.Ui_MainWindow):
         self.answerTextBrowser.setText(SqrtWrk(temp, isMatch(temp))) #отправляем во второй текстовый обработанную строку 
         
 def isMatch(string):
+    return 1
     #тут надо проверять соответствие и возвращать какие-то индексы
     
 
-def SqrtWrk(number): #тут работаем с самим корнем
-    tfdNum.setText("±"+
-			engine.eval("pow("+input+",0.5)").toString());
-            else
-                tfdNum.setText("±" + engine.eval("round(" + input + 
-		"**0.5," + spnAccuracy.getValue() + ")").toString());
-
-
-    return number 
+def SqrtWrk(number, condition): #тут работаем с самим корнем
+    if (condition):
+        return str(pow(number, 0.5))
+    else:
+        return '±'+str(round(number**0.5, 5)) #5 - точность, надо пофиксить
+    
+#     tfdNum.setText("±"+
+# 			engine.eval("pow("+input+",0.5)").toString());
+#             else
+#                 tfdNum.setText("±" + engine.eval("round(" + input + 
+# 		"**0.5," + spnAccuracy.getValue() + ")").toString()); #кусок обращения к питон-машине у Зимы
 
 def main():
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
