@@ -7,10 +7,10 @@ Created on Tue May 12 14:06:22 2020
 
 import sys  #нужен для передачи argv в QApplication
 from PyQt5 import QtWidgets #нужно для работы с формой
-import formBaseUi #это наша форма
+import formBase #это наша форма
 import locale #для конверта флоатов
 
-class ExampleApp(QtWidgets.QMainWindow, formBaseUi.Ui_MainWindow):
+class ExampleApp(QtWidgets.QMainWindow, formBase.Ui_MainWindow):
     def __init__(self):
         # Это здесь нужно для доступа к переменным, методам и т.д. в файле формы
         super().__init__()
@@ -22,26 +22,29 @@ class ExampleApp(QtWidgets.QMainWindow, formBaseUi.Ui_MainWindow):
         
     def SqrtOp(self):
         temp = self.askTextBrowser.toPlainText() #забираем строку из первого текстБокса
-        self.answerTextBrowser.setText(SqrtWrk(isMatch(temp), int(self.rounderSpinBox.cleanText()))) #отправляем во второй текстовый обработанную строку 
+        self.answerTextBrowser.setText(SqrtWrk(isMatch(temp), int(self.roundSpinBox.cleanText()))) #отправляем во второй текстовый обработанную строку 
                                             #из формы тащится значение спинбокса с кол-вом знаков после точки
 
 def isMatch(string): #тут надо проверять соответствие и возвращать какие-то индексы
     pointer = 0
+    string = string.replace(" ","") #удаляем пробелы, мешающие работе
+    string = string.replace('i', 'j') #приводим к перевариваемому питоном виду, если есть комплексная часть
     try: #пришел int, длинный int, ноль
+        if (string.find('-') != -1 and  string.find('j') == -1):
+            string += '0j'
         string = int(string)
         pointer = 1
-    except ValueError:
+    except (ValueError, TypeError):
         
         try: #пришел float в виде (1.2; 1.2E+11), длинный float, float-ноль
             string = locale.atof(string)
             pointer = 2
-        except ValueError:
+        except (ValueError, TypeError):
             
             try: #пришло комплексное число в виде 45+3i или 45+3j
-                string = string.replace('i', 'j') #приводим к перевариваемому питоном виду
                 string = complex(string)
                 pointer = 3
-            except ValueError:
+            except (ValueError, TypeError):
                 string = 'неверный ввод'
     return [pointer, string]
 
@@ -55,14 +58,10 @@ def SqrtWrk(number, rounder): #тут работаем с самим корне�
     #заданная точность +
     #аналитические ???????????
     
-    if (number[0] == 1): 
-        #пришел int, длинный int, ноль
+    if (number[0] == 1 or number[0] == 2): 
+        #пришел int, длинный int, ноль или float в виде (1.2; 1.2E+11), длинный float, float-ноль
         temp += str(round(pow(number[1], 0.5), rounder)) #возводим в степень 0.5, округляем до указанного числа после точки
         #также работает и с длинной арифметикой
-        
-    elif (number[0] == 2): 
-        #пришел float в виде (1.2; 1.2E+11), длинный float, float-ноль
-        temp += str(round(pow(number[1], 0.5), rounder))
         
     elif (number[0] == 3):
         #пришло комплексное число в виде 45+3i или 45+3j
