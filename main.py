@@ -8,6 +8,7 @@ Created on Tue May 12 14:06:22 2020
 import sys  #нужен для передачи argv в QApplication
 from PyQt5 import QtWidgets #нужно для работы с формой
 import formBaseUi #это наша форма
+import locale #для конверта флоатов
 
 class ExampleApp(QtWidgets.QMainWindow, formBaseUi.Ui_MainWindow):
     def __init__(self):
@@ -19,19 +20,39 @@ class ExampleApp(QtWidgets.QMainWindow, formBaseUi.Ui_MainWindow):
         
     def SqrtOp(self):
         temp = self.askTextBrowser.toPlainText() #забираем строку из первого текстБокса
-        self.answerTextBrowser.setText(SqrtWrk(temp, isMatch(temp))) #отправляем во второй текстовый обработанную строку 
-        
+        self.answerTextBrowser.setText(SqrtWrk(temp, isMatch(temp), 5)) #отправляем во второй текстовый обработанную строку 
+                                            #добавить в форму поле с кол-вом знаков для округления и тащить сюда вместо 5
 def isMatch(string):
     return 1
     #тут надо проверять соответствие и возвращать какие-то индексы
     
 
-def SqrtWrk(number, condition): #тут работаем с самим корнем
-    if (condition):
-        return str(pow(number, 0.5))
-    else:
-        return '±'+str(round(number**0.5, 5)) #5 - точность, надо пофиксить
+def SqrtWrk(number, condition, rounder): #тут работаем с самим корнем
+    temp = '±' #корни симметричны #надо ли выводить при нуле?
     
+    #арифметические +
+    #из нуля +, в двух форматах
+    #комплексные
+    #длинные числа +, в двух форматах
+    #заданная точность +, но дописать интерфейс
+    #аналитические
+    
+    if (condition == 2): 
+        #пришел int, длинный int, ноль
+        temp += str(round(pow(int(number), 0.5), rounder)) #возводим в степень 0.5, округляем до указанного числа после точки
+        #также работает и с длинной арифметикой
+        
+    elif (condition == 1): 
+        #пришел float в виде (1.2; 1.2E+11), длинный float, float-ноль
+        temp += str(round(pow(locale.atof(number), 0.5), rounder))
+        
+    else 
+        
+    # if (condition == 3):
+        
+    # else:
+    #     temp += str(eval('round(number**0.5,5)')) #5 - точность, надо пофиксить
+    return temp
 #     tfdNum.setText("±"+
 # 			engine.eval("pow("+input+",0.5)").toString());
 #             else
