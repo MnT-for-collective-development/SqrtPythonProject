@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\S11De\Desktop\SqrtPythonProject\formBaseUI.ui'
+# Form implementation generated from reading ui file 'C:\Users\S11De\Desktop\SqrtPythonProject\formBaseUi.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
@@ -11,14 +11,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(230, 171)
+        MainWindow.resize(356, 381)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(230, 171))
-        MainWindow.setMaximumSize(QtCore.QSize(230, 171))
+        MainWindow.setMinimumSize(QtCore.QSize(0, 0))
+        MainWindow.setMaximumSize(QtCore.QSize(230000, 230000))
         MainWindow.setToolTip("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -31,10 +31,17 @@ class Ui_MainWindow(object):
         self.askTextBrowser.setObjectName("askTextBrowser")
         self.answerTextBrowser = QtWidgets.QTextBrowser(self.centralwidget)
         self.answerTextBrowser.setGeometry(QtCore.QRect(10, 60, 211, 41))
+        self.answerTextBrowser.setDocumentTitle("")
+        self.answerTextBrowser.setPlaceholderText("")
         self.answerTextBrowser.setObjectName("answerTextBrowser")
+        self.rounderSpinBox = QtWidgets.QSpinBox(self.centralwidget)
+        self.rounderSpinBox.setGeometry(QtCore.QRect(230, 110, 42, 22))
+        self.rounderSpinBox.setMinimum(1)
+        self.rounderSpinBox.setMaximum(20)
+        self.rounderSpinBox.setObjectName("rounderSpinBox")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 230, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 356, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)

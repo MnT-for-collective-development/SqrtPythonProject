@@ -77,7 +77,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox">
+   <widget class="QSpinBox" name="rounderSpinBox">
     <property name="geometry">
      <rect>
       <x>230</x>
