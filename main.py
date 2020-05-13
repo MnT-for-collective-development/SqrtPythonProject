@@ -85,7 +85,7 @@ def isMatch(string): #тут надо проверять соответстви�
     string = string.replace('i', 'j') #приводим к перевариваемому питоном виду, если есть комплексная часть
     try: #пришел int, длинный int, ноль
         if (string.find('-') != -1 and  string.find('j') == -1):
-            string += '0j'
+            string += '+0j'
         string = int(string)
         pointer = 1
     except (ValueError, TypeError):
