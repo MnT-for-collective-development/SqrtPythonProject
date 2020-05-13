@@ -174,7 +174,7 @@
   </widget>
   <action name="actionRussian">
    <property name="checkable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Русский</string>
@@ -182,7 +182,7 @@
   </action>
   <action name="actionEnglish">
    <property name="checkable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Английский</string>
@@ -190,7 +190,7 @@
   </action>
   <action name="actionDeutch">
    <property name="checkable">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>Немецкий</string>

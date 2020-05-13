@@ -7,26 +7,30 @@ Created on Tue May 12 14:06:22 2020
 
 import sys  #нужен для передачи argv в QApplication
 #from PyQt5 import QtCore, QtGui, QtWidgets #нужно для работы с формой
-from PyQt5.QtWidgets import (QApplication, QWidget, QToolTip, QPushButton, QMessageBox)
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
+#from PyQt5.QtWidgets import (QApplication, QWidget, QToolTip, QPushButton, QMessageBox)
+#from PyQt5.QtGui import *
+#from PyQt5.QtCore import *
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 import formBase #это наша форма
 import locale #для конверта флоатов
 import webbrowser #для перехода на форум
 
-ActiveLan = 'ru'
-RUSSIAN = ['Поиск корня','Поле для ввода', 'Поле для ответа', 'Нажать, чтоб посчитать корни', 'Округление', 'Язык', 'Русский', 'Английский', 'Немецкий', 'Помощь', 'Форум', 'Информация', 'тут текст для информации']
-ENGLISH = ['Root searching']
-DEUTCH = ['Wurzelsuche']
+
+LANGUAGE = [1,
+           ['Поиск корня','Поле для ввода', 'Поле для ответа', 'Нажать, чтоб посчитать корни', 'Округление', 'Язык', 'Помощь', 'Русский', 'Английский', 'Немецкий', 'Форум', 'Информация', 'Леха, Ярик и Рыжий', 'Неверный ввод'],
+           ['Root searching','Input field', 'Output field', 'Push to take roots', 'Round', 'Language', 'Help', 'Russian', 'English', 'Deutch', 'Forum', 'Information', 'Leha, Yarik and Redhead', 'Invalid input'], 
+           ['Wurzelsuche', 'Eingabefeld', 'Antwortfeld', 'Klicken Sie, um die Wurzeln zu zählen', 'Rundung', 'Zunge', 'Hilfe', 'Russisch', 'Englisch', 'Deutsche', 'Forum', 'Information', 'Lech, Yarik und Red', 'Ungültige Eingabe']]
 
 URL = 'https://github.com/MnT-for-collective-development/SqrtPythonProject' #ссылка на форум поддержки
 
 class ExampleApp(QtWidgets.QMainWindow, formBase.Ui_MainWindow):
+    
     def __init__(self):
         # Это здесь нужно для доступа к переменным, методам и т.д. в файле формы
         super().__init__()
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
+        ChangeLang(self) #начальное задание языка
 
         self.answerButton.clicked.connect(self.SqrtOp) #обрабатываем расчет корня
         self.actionHelp.triggered.connect(self.OpenURL) #обрабатываем кнопку помощи
@@ -35,32 +39,45 @@ class ExampleApp(QtWidgets.QMainWindow, formBase.Ui_MainWindow):
         self.actionDeutch.triggered.connect(self.ChangeLangDe) #привязываем кнопки к переводу
         self.actionInfo.triggered.connect(self.showdialog) #привязываем кнопки к информации и помощи
         
-    def OpenURL(self):
-        webbrowser.open_new(URL)
+    def OpenURL(self): 
+        webbrowser.open_new(URL) #открываем заданную ссылку (тут - мейн репозитория гитхаб)
         
     def SqrtOp(self):
         temp = self.askTextBrowser.toPlainText() #забираем строку из первого текстБокса
         self.answerTextBrowser.setText(SqrtWrk(isMatch(temp), int(self.roundSpinBox_2.cleanText()))) #отправляем во второй текстовый обработанную строку 
                                             #из формы тащится значение спинбокса с кол-вом знаков после точки
-    def ChangeLangEn(self):
-        ActiveLan = 'en'
-        ChangeLang(self)
-        
     def ChangeLangRu(self):
-        ChangeLang(self, 'ru')
+        LANGUAGE[0] = 1 #меняем нынешний язык на русский
+        ChangeLang(self) #применяем изменения
+        
+    def ChangeLangEn(self):
+        LANGUAGE[0] = 2 #меняем нынешний язык на английский
+        ChangeLang(self) #применяем изменения
         
     def ChangeLangDe(self):
-        ChangeLang(self, 'de')
+        LANGUAGE[0] = 3 #меняем нынешний язык на немецкий
+        ChangeLang(self) #применяем изменения
 
     def showdialog(self):
         msg = QMessageBox()
-        
-        msg.setText(RUSSIAN[12])
-        msg.setWindowTitle(' ')
+        msg.setText(LANGUAGE[LANGUAGE[0]][12])
+        msg.setWindowTitle(LANGUAGE[LANGUAGE[0]][11])
         retval = msg.exec_()
 
-def ChangeLang(self, language):
-    self.setWindowTitle('12112')
+def ChangeLang(self):
+    self.setWindowTitle(LANGUAGE[LANGUAGE[0]][0]) #заголовок окна
+    self.askTextLabel.setText(LANGUAGE[LANGUAGE[0]][1]) #поле ввода
+    self.answerTextLabel.setText(LANGUAGE[LANGUAGE[0]][2]) #поле вывода
+    self.answerButton.setText(LANGUAGE[LANGUAGE[0]][3]) #кнопка решения
+    self.roundLabel.setText(LANGUAGE[LANGUAGE[0]][4]) #кол-во точек после запятой
+    self.menuLanguage.setTitle(LANGUAGE[LANGUAGE[0]][5]) #меню языков
+    self.menuHelp.setTitle(LANGUAGE[LANGUAGE[0]][6]) #меню помощи
+    self.actionRussian.setText(LANGUAGE[LANGUAGE[0]][7]) #русский
+    self.actionEnglish.setText(LANGUAGE[LANGUAGE[0]][8]) #английский
+    self.actionDeutch.setText(LANGUAGE[LANGUAGE[0]][9]) #немецкий
+    self.actionHelp.setText(LANGUAGE[LANGUAGE[0]][10]) #помощь
+    self.actionInfo.setText(LANGUAGE[LANGUAGE[0]][11]) #информация
+    self.answerTextBrowser.setText('')
 
 def isMatch(string): #тут надо проверять соответствие и возвращать какие-то индексы
     pointer = 0
@@ -82,7 +99,7 @@ def isMatch(string): #тут надо проверять соответстви�
                 string = complex(string)
                 pointer = 3
             except (ValueError, TypeError):
-                string = 'неверный ввод'
+                string = LANGUAGE[LANGUAGE[0]][13]
     return [pointer, string]
 
 def SqrtWrk(number, rounder): #тут работаем с самим корнем
