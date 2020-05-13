@@ -18,11 +18,11 @@ import webbrowser #для перехода на форум
 
 
 LANGUAGE = [1,
-           ['Поиск корня','Поле для ввода', 'Поле для ответа', 'Нажать, чтоб посчитать корни', 'Округление', 'Язык', 'Помощь', 'Русский', 'Английский', 'Немецкий', 'Форум', 'Информация', 'Леха, Ярик и Рыжий', 'Неверный ввод'],
-           ['Root searching','Input field', 'Output field', 'Push to take roots', 'Round', 'Language', 'Help', 'Russian', 'English', 'Deutch', 'Forum', 'Information', 'Leha, Yarik and Redhead', 'Invalid input'], 
-           ['Wurzelsuche', 'Eingabefeld', 'Antwortfeld', 'Klicken Sie, um die Wurzeln zu zählen', 'Rundung', 'Zunge', 'Hilfe', 'Russisch', 'Englisch', 'Deutsche', 'Forum', 'Information', 'Lech, Yarik und Red', 'Ungültige Eingabe']]
+           ['Поиск корня','Поле для ввода', 'Поле для ответа', 'Нажать, чтоб посчитать корни', 'Округление', 'Язык', 'Помощь', 'Русский', 'Английский', 'Немецкий', 'Форум', 'Информация', "Программа для вычисления корня числа<br><br>Авторы:<br>Ушаков А.С<br>Кириллов Я.А.<br>Петров П.П.<br><p align='center'>г.Пермь, ПГНИУ, 2020</p>", 'Неверный ввод'],
+           ['Root searching','Input field', 'Output field', 'Push to take roots', 'Round', 'Language', 'Help', 'Russian', 'English', 'Deutch', 'Forum', 'Information', "A program for calculating the root of a number<br><br>Authors:<br>Ushakov A.S.<br>Kirillov Y.A.<br>Petrov P.P.<br><p align='center'>Perm, PSU, 2020</p>", 'Invalid input'], 
+           ['Wurzelsuche', 'Eingabefeld', 'Antwortfeld', 'Klicken Sie, um die Wurzeln zu zählen', 'Rundung', 'Zunge', 'Hilfe', 'Russisch', 'Englisch', 'Deutsche', 'Forum', 'Information', "Programm zur Berechnung der Wurzel einer Zahl<br><br>Autoren:<br>Ushakov A.S.<br>Kirillov Y.A.<br>Petrov P.P.<br><p align='center'>Perm, PSU, 2020</p>", 'Ungültige Eingabe']]
 
-URL = 'https://github.com/MnT-for-collective-development/SqrtPythonProject' #ссылка на форум поддержки
+URL = 'https://github.com/MnT-for-collective-development/SqrtPythonProject/issues' #ссылка на форум поддержки
 
 class ExampleApp(QtWidgets.QMainWindow, formBase.Ui_MainWindow):
     
