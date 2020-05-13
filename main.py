@@ -6,24 +6,61 @@ Created on Tue May 12 14:06:22 2020
 """
 
 import sys  #нужен для передачи argv в QApplication
-from PyQt5 import QtWidgets #нужно для работы с формой
+#from PyQt5 import QtCore, QtGui, QtWidgets #нужно для работы с формой
+from PyQt5.QtWidgets import (QApplication, QWidget, QToolTip, QPushButton, QMessageBox)
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5 import QtWidgets
 import formBase #это наша форма
 import locale #для конверта флоатов
+import webbrowser #для перехода на форум
+
+ActiveLan = 'ru'
+RUSSIAN = ['Поиск корня','Поле для ввода', 'Поле для ответа', 'Нажать, чтоб посчитать корни', 'Округление', 'Язык', 'Русский', 'Английский', 'Немецкий', 'Помощь', 'Форум', 'Информация', 'тут текст для информации']
+ENGLISH = ['Root searching']
+DEUTCH = ['Wurzelsuche']
+
+URL = 'https://github.com/MnT-for-collective-development/SqrtPythonProject' #ссылка на форум поддержки
 
 class ExampleApp(QtWidgets.QMainWindow, formBase.Ui_MainWindow):
     def __init__(self):
         # Это здесь нужно для доступа к переменным, методам и т.д. в файле формы
         super().__init__()
         self.setupUi(self)  # Это нужно для инициализации нашего дизайна
+
+        self.answerButton.clicked.connect(self.SqrtOp) #обрабатываем расчет корня
+        self.actionHelp.triggered.connect(self.OpenURL) #обрабатываем кнопку помощи
+        self.actionEnglish.triggered.connect(self.ChangeLangEn)
+        self.actionRussian.triggered.connect(self.ChangeLangRu)
+        self.actionDeutch.triggered.connect(self.ChangeLangDe) #привязываем кнопки к переводу
+        self.actionInfo.triggered.connect(self.showdialog) #привязываем кнопки к информации и помощи
         
-        self.answerButton.clicked.connect(self.SqrtOp) #обрабатываем клик кнопки
-        
-        #сюда добавить обработчик кнопки смены языка
+    def OpenURL(self):
+        webbrowser.open_new(URL)
         
     def SqrtOp(self):
         temp = self.askTextBrowser.toPlainText() #забираем строку из первого текстБокса
         self.answerTextBrowser.setText(SqrtWrk(isMatch(temp), int(self.roundSpinBox_2.cleanText()))) #отправляем во второй текстовый обработанную строку 
                                             #из формы тащится значение спинбокса с кол-вом знаков после точки
+    def ChangeLangEn(self):
+        ActiveLan = 'en'
+        ChangeLang(self)
+        
+    def ChangeLangRu(self):
+        ChangeLang(self, 'ru')
+        
+    def ChangeLangDe(self):
+        ChangeLang(self, 'de')
+
+    def showdialog(self):
+        msg = QMessageBox()
+        
+        msg.setText(RUSSIAN[12])
+        msg.setWindowTitle(' ')
+        retval = msg.exec_()
+
+def ChangeLang(self, language):
+    self.setWindowTitle('12112')
 
 def isMatch(string): #тут надо проверять соответствие и возвращать какие-то индексы
     pointer = 0

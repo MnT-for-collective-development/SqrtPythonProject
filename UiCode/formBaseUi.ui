@@ -40,9 +40,6 @@
   <property name="toolTip">
    <string/>
   </property>
-  <property name="locale">
-   <locale language="Russian" country="Russia"/>
-  </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
   </property>
@@ -101,7 +98,7 @@
        <item>
         <widget class="QPushButton" name="answerButton">
          <property name="text">
-          <string>Push to take sqr</string>
+          <string>Нажать, чтоб посчитать корни</string>
          </property>
         </widget>
        </item>
@@ -109,20 +106,6 @@
      </item>
      <item row="0" column="1">
       <layout class="QVBoxLayout" name="rightBaseLayout">
-       <item>
-        <layout class="QVBoxLayout" name="helpLayout">
-         <item>
-          <widget class="QLabel" name="helpLabel">
-           <property name="text">
-            <string>Помощь</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="helpComboBox"/>
-         </item>
-        </layout>
-       </item>
        <item>
         <spacer name="rightBaseLayoutSpacer">
          <property name="orientation">
@@ -157,21 +140,75 @@
          </item>
         </layout>
        </item>
-       <item>
-        <widget class="QLabel" name="languageLabel">
-         <property name="text">
-          <string>Язык</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="languageComboBox"/>
-       </item>
       </layout>
      </item>
     </layout>
    </widget>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>610</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuLanguage">
+    <property name="title">
+     <string>Язык</string>
+    </property>
+    <addaction name="actionRussian"/>
+    <addaction name="actionEnglish"/>
+    <addaction name="actionDeutch"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Помощь</string>
+    </property>
+    <addaction name="actionHelp"/>
+    <addaction name="actionInfo"/>
+   </widget>
+   <addaction name="menuLanguage"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <action name="actionRussian">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Русский</string>
+   </property>
+  </action>
+  <action name="actionEnglish">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Английский</string>
+   </property>
+  </action>
+  <action name="actionDeutch">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Немецкий</string>
+   </property>
+   <property name="iconText">
+    <string>Немецкий</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Форум</string>
+   </property>
+  </action>
+  <action name="actionInfo">
+   <property name="text">
+    <string>Информация</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
