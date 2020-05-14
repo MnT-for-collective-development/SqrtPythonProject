@@ -99,7 +99,7 @@ def isMatch(string): #тут надо проверять соответстви�
                 string = complex(string)
                 pointer = 3
             except (ValueError, TypeError):
-                string = LANGUAGE[LANGUAGE[0]][13]
+                string = LANGUAGE[LANGUAGE[0]][13] #информация на нужном языке
     return [pointer, string]
 
 def SqrtWrk(number, rounder): #тут работаем с самим корнем
@@ -110,7 +110,6 @@ def SqrtWrk(number, rounder): #тут работаем с самим корне�
     #комплексные
     #длинные числа +
     #заданная точность +
-    #аналитические ???????????
     
     if (number[0] == 1 or number[0] == 2): 
         #пришел int, длинный int, ноль или float в виде (1.2; 1.2E+11), длинный float, float-ноль
@@ -123,7 +122,7 @@ def SqrtWrk(number, rounder): #тут работаем с самим корне�
         temp += str(round(compTemp.real, rounder) + round(compTemp.imag, rounder)*1j)
         
     else: #тут можно сделать еще кондишены на ошибки, но оно никому не надо
-        temp = number[1]
+        temp = number[1] #вывод ошибки на нужном языке
     
     return temp
 
